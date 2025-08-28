@@ -159,7 +159,7 @@
         
         <div class="mes-actual">
             <h3>🗓️ Configurando para: <span id="mesActual"></span></h3>
-            <p>Configure las tareas una sola vez y genere correos automáticamente todo el mes</p>
+            <p>Configura las tareas una sola vez y genera correos automáticamente todo el mes</p>
         </div>
         
         <form id="taskForm">
@@ -187,7 +187,7 @@
                     🗑️ Limpiar Todo
                 </button>
                 <button type="button" class="btn btn-primary" onclick="guardarTareas()" id="btnGuardar">
-                    🚀 Configurar Tareas
+                    🚀 Configurar Tareas y redactar correos
                 </button>
             </div>
         </form>
@@ -318,7 +318,7 @@ C3 - Trend [tono personal/promo]`;
                     const result = await response.json();
                     
                     if (result.status === 'success') {
-                        mostrarStatus('✅ Tareas configuradas correctamente!', 'success');
+                        mostrarStatus('✅ Tareas configuradas correctamente! Vuelve en dos minutos a notion para ver los correos redactados', 'success');
                         btnGuardar.textContent = '🎉 ¡Configurado!';
                         btnGuardar.style.background = '#28a745';
                         
@@ -328,7 +328,7 @@ C3 - Trend [tono personal/promo]`;
                                 limpiarFormulario();
                             }
                             btnGuardar.disabled = false;
-                            btnGuardar.textContent = '🚀 Configurar Tareas';
+                            btnGuardar.textContent = '🚀 Configurar Tareas y redactar correos';
                             btnGuardar.style.background = '';
                         }, 3000);
                         
@@ -344,7 +344,7 @@ C3 - Trend [tono personal/promo]`;
                 mostrarStatus(`❌ Error: ${error.message}`, 'error');
                 
                 btnGuardar.disabled = false;
-                btnGuardar.textContent = '🚀 Configurar Tareas';
+                btnGuardar.textContent = '🚀 Configurar Tareas y redactar correos';
             }
         }
     </script>
