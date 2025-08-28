@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📧 Configurar Tareas del Mes - Compara Online</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+        
+        .mes-actual {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 5px solid #667eea;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+            font-size: 1.1em;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #fafbfc;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 300px;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transform: translateX(350px);
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+        
+        .status.show {
+            transform: translateX(0);
+        }
+        
+        .status.success { background: #28a745; }
+        .status.error { background: #dc3545; }
+        .status.info { background: #17a2b8; }
+        
+        .info-section {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .info-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 12px;
+        }
+        
+        .info-content {
+            color: #856404;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📧 Configurar Tareas del Mes</h1>
+        
+        <div class="mes-actual">
+            <h3>🗓️ Configurando para: <span id="mesActual"></span></h3>
+            <p>Configure las tareas una sola vez y genere correos automáticamente todo el mes</p>
+        </div>
+        
+        <form id="taskForm">
+            <div class="form-group">
+                <label for="tareaAVCO">✈️ Tarea AVCO (Asistencia de Viaje):</label>
+                <textarea 
+                    id="tareaAVCO" 
+                    placeholder="Ejemplo:&#10;&#10;VIAJE Base 1&#10;C1 - reactivación Cotización abandonada [tono personal]&#10;C2 - Beneficio práctico + rapidez y facilidad [tono personal/promo]&#10;..."
+                ></textarea>
+            </div>
+            
+            <div class="form-group">
+                <label for="tareaCICO">🚗 Tarea CICO (Seguro para Carro):</label>
+                <textarea 
+                    id="tareaCICO" 
+                    placeholder="Ejemplo:&#10;&#10;AUTO Base 1&#10;C1 - Cotización abandonada [tono personal]&#10;C2 - facilidad [tono personal/promo]&#10;..."
+                ></textarea>
+            </div>
+            
+            <div class="btn-container">
+                <button type="button" class="btn btn-secondary" onclick="cargarEjemplo()">
+                    📝 Cargar Ejemplo
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
+                    🗑️ Limpiar Todo
+                </button>
+                <button type="button" class="btn btn-primary" onclick="guardarTareas()" id="btnGuardar">
+                    🚀 Configurar Tareas
+                </button>
+            </div>
+        </form>
+        
+        <div class="info-section">
+            <div class="info-title">💡 Información importante</div>
+            <div class="info-content">
+                • <strong>Una línea por correo:</strong> C1, C2, C3... para identificar<br>
+                • <strong>Tono entre corchetes:</strong> [tono personal], [tono personal/promo]<br>
+                • <strong>Separar bases:</strong> Usar líneas divisorias (_____ o -----)<br>
+                • <strong>Se agregan automáticamente:</strong> Instrucciones A/B, formato de bases, guidelines
+            </div>
+        </div>
+    </div>
+    
+    <div id="status" class="status"></div>
+    
+    <script>
+        // 📅 MOSTRAR MES ACTUAL
+        const now = new Date();
+        const mesActual = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        const mesYear = mesActual.toLocaleDateString('es-CO', { 
+            month: 'long', 
+            year: 'numeric' 
+        });
+        document.getElementById('mesActual').textContent = mesYear;
+        
+        // 🎯 CONFIGURACIÓN DE WEBHOOKS
+        const WEBHOOKS = {
+            configurar: 'https://n8n-staging.internal.comparaonline.com/webhook-test/configurar-tareas-mes'
+        };
+        
+        // 📝 CARGAR EJEMPLO
+        function cargarEjemplo() {
+            document.getElementById('tareaAVCO').value = `VIAJE Base 1
+C1 - reactivación Cotización abandonada [tono personal]
+C2 - Beneficio práctico + rapidez y facilidad + póliza por whatsapp [tono personal/promo]
+C3 - Casos reales de ejemplo [tono personal]
+C4 - Beneficio económico + TREND [tono personal/promo]
+C5 - Último correo antes de viajar + urgencia [tono personal]
+C6 - correo en viaje (decir que es posible contratar viajando) [tono personal]
+___________
+VIAJE Base 2
+C1 - Entrada suave + recordatorio de cotización [tono personal]
+C2 - ventajas del seguro + facilidad [tono personal/promo]
+_________
+VIAJE Base 3
+C1 - Entrada suave + recordatorio de cotización [tono personal]
+C2 - ventajas del seguro + facilidad [tono personal/promo]`;
+
+            document.getElementById('tareaCICO').value = `AUTO Base 1
+C1 - Cotización abandonada [tono personal]
+C2 - facilidad [tono personal/promo]
+C3 - ahorro (poner valores) [tono personal/promo]
+C4 - Trend [tono personal/promo]
+C5 - Última llamada suave [tono personal]
+------------
+AUTO Base 2
+C1 - Follow-up suave con atractivo racional (recuerda interés) [tono personal]
+C2 - Refuerzo de la intención + facilidad [tono personal/promo]
+C3 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
+C4 - Trend [tono personal/promo]
+------------
+AUTO Base 3
+C1 - Follow-up suave con atractivo racional (recuerda interés)
+C2 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
+C3 - Trend [tono personal/promo]`;
+            
+            mostrarStatus('📝 Ejemplo cargado exitosamente', 'info');
+        }
+        
+        // 🗑️ LIMPIAR FORMULARIO
+        function limpiarFormulario() {
+            if (confirm('¿Estás seguro de que quieres limpiar todo el formulario?')) {
+                document.getElementById('taskForm').reset();
+                mostrarStatus('🗑️ Formulario limpiado', 'info');
+            }
+        }
+        
+        // 📊 MOSTRAR STATUS
+        function mostrarStatus(mensaje, tipo) {
+            const status = document.getElementById('status');
+            status.textContent = mensaje;
+            status.className = `status ${tipo} show`;
+            
+            setTimeout(function() {
+                status.classList.remove('show');
+            }, 3000);
+        }
+        
+        // 🚀 GUARDAR TAREAS
+        async function guardarTareas() {
+            const tareaAVCO = document.getElementById('tareaAVCO').value;
+            const tareaCICO = document.getElementById('tareaCICO').value;
+            const btnGuardar = document.getElementById('btnGuardar');
+            
+            // ✅ VALIDACIONES
+            if (!tareaAVCO.trim() || !tareaCICO.trim()) {
+                mostrarStatus('❌ Por favor completa ambas tareas', 'error');
+                return;
+            }
+            
+            // 🎨 UI FEEDBACK
+            btnGuardar.disabled = true;
+            btnGuardar.textContent = '⏳ Configurando...';
+            
+            const payload = {
+                mesActual: mesYear,
+                tareaDelMesAVCO: tareaAVCO,
+                tareaDelMesCICO: tareaCICO,
+                usuario: 'Email Marketing Team',
+                timestamp: new Date().toISOString(),
+                source: 'formulario_github_v2'
+            };
+            
+            try {
+                mostrarStatus('🔧 Enviando configuración...', 'info');
+                
+                const response = await fetch(WEBHOOKS.configurar, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    
+                    if (result.status === 'success') {
+                        mostrarStatus('✅ Tareas configuradas correctamente!', 'success');
+                        btnGuardar.textContent = '🎉 ¡Configurado!';
+                        btnGuardar.style.background = '#28a745';
+                        
+                        // Limpiar después de 3 segundos
+                        setTimeout(function() {
+                            if (confirm('¿Quieres limpiar el formulario?')) {
+                                limpiarFormulario();
+                            }
+                            btnGuardar.disabled = false;
+                            btnGuardar.textContent = '🚀 Configurar Tareas';
+                            btnGuardar.style.background = '';
+                        }, 3000);
+                        
+                    } else {
+                        throw new Error(result.message || 'Error en la configuración');
+                    }
+                } else {
+                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                }
+                
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarStatus(`❌ Error: ${error.message}`, 'error');
+                
+                btnGuardar.disabled = false;
+                btnGuardar.textContent = '🚀 Configurar Tareas';
+            }
+        }
+    </script>
+</body>
+</html>
