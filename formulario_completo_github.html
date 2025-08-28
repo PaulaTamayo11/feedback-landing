@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📧 Configurar Tareas del Mes - Compara Online</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 1000px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            animation: slideUp 0.6s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 1.1em;
+        }
+        
+        .mes-actual {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            border-left: 5px solid #667eea;
+            position: relative;
+        }
+        
+        .mes-actual::after {
+            content: '📅';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5em;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        
+        .form-group {
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: #555;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .label-icon {
+            font-size: 1.3em;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 18px;
+            border: 2px solid #e1e5e9;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: #fafbfc;
+            transition: all 0.3s ease;
+            resize: vertical;
+            min-height: 300px;
+            line-height: 1.6;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .char-counter {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 12px;
+            color: #999;
+            background: rgba(255,255,255,0.9);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #666;
+            border: 2px solid #e9ecef;
+        }
+        
+        .btn-secondary:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-link {
+            background: none;
+            color: #667eea;
+            text-decoration: underline;
+            font-size: 14px;
+            padding: 10px;
+            min-width: auto;
+            flex: none;
+        }
+        
+        .btn-link:hover {
+            color: #764ba2;
+            transform: none;
+        }
+        
+        .info-section {
+            background: #fff3cd;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 25px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .info-title {
+            font-weight: 600;
+            color: #856404;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-content {
+            color: #856404;
+            line-height: 1.6;
+        }
+        
+        .auto-add-section {
+            background: #e7f3ff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            border-left: 3px solid #0066cc;
+        }
+        
+        .auto-add-title {
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+        
+        .auto-add-list {
+            color: #0066cc;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            transform: translateX(350px);
+            transition: all 0.4s ease;
+            z-index: 1000;
+            max-width: 300px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        .status.show {
+            transform: translateX(0);
+        }
+        
+        .status.success { background: #28a745; }
+        .status.error { background: #dc3545; }
+        .status.info { background: #17a2b8; }
+        .status.warning { background: #ffc107; color: #856404; }
+        
+        .preview {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid #e1e8ff;
+        }
+        
+        .preview.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .preview-title {
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        
+        .preview-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff40;
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .version-info {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+            font-size: 11px;
+            color: #999;
+            opacity: 0.7;
+        }
+        
+        .keyboard-shortcuts {
+            position: absolute;
+            bottom: 10px;
+            left: 15px;
+            font-size: 11px;
+            color: #999;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📧 Configurar Tareas del Mes</h1>
+            <p class="subtitle">Sistema automatizado de email marketing</p>
+        </div>
+        
+        <div class="mes-actual">
+            <h3>🗓️ Configurando para: <span id="mesActual"></span></h3>
+            <p>Configure las tareas una sola vez y genere correos automáticamente todo el mes</p>
+        </div>
+        
+        <form id="taskForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="tareaAVCO">
+                        <span class="label-icon">✈️</span>
+                        Tarea AVCO (Asistencia de Viaje)
+                    </label>
+                    <textarea 
+                        id="tareaAVCO" 
+                        placeholder="Ejemplo:&#10;&#10;VIAJE Base 1&#10;C1 - reactivación Cotización abandonada [tono personal]&#10;C2 - Beneficio práctico + rapidez y facilidad + póliza por whatsapp [tono personal/promo]&#10;C3 - Casos reales de ejemplo [tono personal]&#10;...&#10;___________&#10;VIAJE Base 2&#10;C1 - Entrada suave + recordatorio de cotización [tono personal]&#10;..."
+                        oninput="updateCharCount('tareaAVCO')"
+                    ></textarea>
+                    <div class="char-counter" id="counterAVCO">0 caracteres</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="tareaCICO">
+                        <span class="label-icon">🚗</span>
+                        Tarea CICO (Seguro para Carro)
+                    </label>
+                    <textarea 
+                        id="tareaCICO" 
+                        placeholder="Ejemplo:&#10;&#10;AUTO Base 1&#10;C1 - Cotización abandonada [tono personal]&#10;C2 - facilidad [tono personal/promo]&#10;C3 - ahorro (poner valores) [tono personal/promo]&#10;...&#10;------------&#10;AUTO Base 2&#10;C1 - Follow-up suave con atractivo racional [tono personal]&#10;..."
+                        oninput="updateCharCount('tareaCICO')"
+                    ></textarea>
+                    <div class="char-counter" id="counterCICO">0 caracteres</div>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button type="button" class="btn btn-secondary" onclick="cargarEjemplo()">
+                    📝 Cargar Ejemplo Completo
+                </button>
+                <button type="button" class="btn btn-link" onclick="limpiarFormulario()">
+                    🗑️ Limpiar Todo
+                </button>
+                <button type="button" class="btn btn-primary" onclick="guardarTareas()" id="btnGuardar">
+                    🚀 Configurar y Activar Sistema
+                </button>
+            </div>
+        </form>
+        
+        <div class="preview" id="preview">
+            <div class="preview-title">🔍 Vista Previa de Configuración</div>
+            <div class="preview-content" id="previewContent"></div>
+        </div>
+        
+        <div class="info-section">
+            <div class="info-title">
+                <span>💡</span>
+                Formato recomendado
+            </div>
+            <div class="info-content">
+                • <strong>Una línea por correo:</strong> C1, C2, C3... para identificar cada email<br>
+                • <strong>Tono entre corchetes:</strong> [tono personal], [tono personal/promo]<br>
+                • <strong>Separar bases:</strong> Usar líneas divisorias (_____ o -----)<br>
+                • <strong>Ser específico:</strong> Incluir estrategia y contexto para cada correo
+            </div>
+            
+            <div class="auto-add-section">
+                <div class="auto-add-title">📋 Se agregan automáticamente:</div>
+                <div class="auto-add-list">
+                    • Instrucciones de A/B testing para asunto, preview, cuerpo y CTA<br>
+                    • Formato de bases (🔥 Cálidos, ⚡ Tibios, ❄️ Fríos)<br>
+                    • Recordatorios sobre cotizaciones y guidelines de redacción<br>
+                    • Toda la base de conocimientos y tono de voz
+                </div>
+            </div>
+        </div>
+        
+        <div class="version-info">v2.0 - GitHub Integration</div>
+        <div class="keyboard-shortcuts">Ctrl+Enter para guardar</div>
+    </div>
+    
+    <div id="status" class="status"></div>
+    
+    <script>
+        // 🚀 FUNCIÓN PRINCIPAL - GUARDAR TAREAS
+        async function guardarTareas() {
+            const tareaAVCO = document.getElementById('tareaAVCO').value;
+            const tareaCICO = document.getElementById('tareaCICO').value;
+            const btnGuardar = document.getElementById('btnGuardar');
+            
+            // ✅ VALIDACIONES
+            if (!tareaAVCO.trim() || !tareaCICO.trim()) {
+                mostrarStatus('❌ Por favor completa ambas tareas antes de continuar', 'error');
+                return;
+            }
+            
+            if (tareaAVCO.length < 100 || tareaCICO.length < 100) {
+                mostrarStatus('⚠️ Las tareas parecen muy cortas. ¿Estás seguro?', 'warning');
+                setTimeout(() => continuarGuardado(), 2000);
+                return;
+            }
+            
+            continuarGuardado();
+            
+            async function continuarGuardado() {
+                // 🎨 UI FEEDBACK
+                btnGuardar.disabled = true;
+                btnGuardar.innerHTML = '<span class="loading"></span>Configurando sistema...';
+                
+                // 📋 MOSTRAR PREVIEW
+                mostrarPreview(tareaAVCO, tareaCICO);
+                
+                const payload = {
+                    mesActual: mesYear,
+                    tareaDelMesAVCO: tareaAVCO,
+                    tareaDelMesCICO: tareaCICO,
+                    usuario: 'Email Marketing Team',
+                    timestamp: new Date().toISOString(),
+                    source: 'formulario_github',
+                    version: '2.0'
+                };
+                
+                try {
+                    mostrarStatus('🔧 Configurando tareas en el sistema...', 'info');
+                    
+                    // 📡 LLAMADA AL WEBHOOK DE CONFIGURACIÓN
+                    const configResponse = await fetch(WEBHOOKS.configurar, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (configResponse.ok) {
+                        const configResult = await configResponse.json();
+                        
+                        if (configResult.status === 'success') {
+                            mostrarStatus('✅ Tareas configuradas! Sistema listo para generar correos', 'success');
+                            
+                            // 🎉 ANIMACIÓN DE ÉXITO
+                            btnGuardar.innerHTML = '🎉 ¡Configuración Exitosa!';
+                            btnGuardar.style.background = 'linear-gradient(135deg, #28a745 0%, #20c997 100%)';
+                            
+                            // 📊 MOSTRAR INFORMACIÓN DEL RESULTADO
+                            actualizarPreviewConResultado(configResult);
+                            
+                            // 🔄 RESETEAR BOTÓN DESPUÉS DE 5 SEGUNDOS
+                            setTimeout(() => {
+                                btnGuardar.disabled = false;
+                                btnGuardar.innerHTML = '🚀 Configurar y Activar Sistema';
+                                btnGuardar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                                
+                                // 🧹 LIMPIAR FORMULARIO
+                                if (confirm('¿Quieres limpiar el formulario para el próximo mes?')) {
+                                    limpiarFormulario();
+                                }
+                            }, 5000);
+                            
+                        } else {
+                            throw new Error(configResult.message || 'Error en la configuración');
+                        }
+                        
+                    } else {
+                        const errorData = await configResponse.text();
+                        throw new Error(`Error ${configResponse.status}: ${errorData}`);
+                    }
+                    
+                } catch (error) {
+                    console.error('Error detallado:', error);
+                    mostrarStatus(`❌ Error: ${error.message}`, 'error');
+                    
+                    // 🔄 RESETEAR BOTÓN EN ERROR
+                    btnGuardar.disabled = false;
+                    btnGuardar.innerHTML = '🚀 Configurar y Activar Sistema';
+                    btnGuardar.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }
+            }
+        }
+        
+        // 📋 MOSTRAR PREVIEW DE LA CONFIGURACIÓN
+        function mostrarPreview(tareaAVCO, tareaCICO) {
+            const preview = document.getElementById('preview');
+            const content = document.getElementById('previewContent');
+            
+            // Contar correos por producto
+            const correosAVCO = (tareaAVCO.match(/C\d+\s*-/g) || []).length;
+            const correosCICO = (tareaCICO.match(/C\d+\s*-/g) || []).length;
+            
+            // Detectar bases
+            const basesAVCO = (tareaAVCO.match(/(BASE|Base)\s*\d+/g) || []).length;
+            const basesCICO = (tareaCICO.match(/(BASE|Base)\s*\d+/g) || []).length;
+            
+            content.innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 15px;">
+                    <div style="padding: 15px; background: #f8f9ff; border-radius: 8px;">
+                        <h4 style="color: #667eea; margin-bottom: 10px;">✈️ AVCO (Viajes)</h4>
+                        <p><strong>${correosAVCO} correos</strong> en ${basesAVCO} bases</p>
+                        <p style="font-size: 0.9em; color: #666;">${tareaAVCO.length.toLocaleString()} caracteres</p>
+                    </div>
+                    <div style="padding: 15px; background: #f0f8f0; border-radius: 8px;">
+                        <h4 style="color: #28a745; margin-bottom: 10px;">🚗 CICO (Seguros)</h4>
+                        <p><strong>${correosCICO} correos</strong> en ${basesCICO} bases</p>
+                        <p style="font-size: 0.9em; color: #666;">${tareaCICO.length.toLocaleString()} caracteres</p>
+                    </div>
+                </div>
+                <div style="padding: 12px; background: #fff3cd; border-radius: 6px; border-left: 3px solid #ffc107;">
+                    <p style="color: #856404; margin: 0;">
+                        <strong>📤 Enviando al sistema:</strong> Se agregarán automáticamente las instrucciones de A/B testing, 
+                        formato de bases y guidelines de redacción.
+                    </p>
+                </div>
+            `;
+            
+            preview.classList.add('show');
+        }
+        
+        // 📊 ACTUALIZAR PREVIEW CON RESULTADO
+        function actualizarPreviewConResultado(resultado) {
+            const content = document.getElementById('previewContent');
+            const data = resultado.data;
+            
+            content.innerHTML += `
+                <div style="margin-top: 20px; padding: 15px; background: #d4edda; border-radius: 8px; border-left: 3px solid #28a745;">
+                    <h4 style="color: #155724; margin-bottom: 10px;">✅ Configuración Completada</h4>
+                    <p style="color: #155724; margin: 5px 0;"><strong>Mes:</strong> ${data.mes}</p>
+                    <p style="color: #155724; margin: 5px 0;"><strong>Configurado:</strong> ${new Date(data.fechaConfig).toLocaleString('es-CO')}</p>
+                    <p style="color: #155724; margin: 5px 0;"><strong>AVCO:</strong> ${data.longitudAVCO?.toLocaleString()} caracteres procesados</p>
+                    <p style="color: #155724; margin: 5px 0;"><strong>CICO:</strong> ${data.longitudCICO?.toLocaleString()} caracteres procesados</p>
+                    
+                    <div style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.7); border-radius: 6px;">
+                        <p style="color: #155724; margin: 0; font-weight: 600;">🎯 Próximo paso:</p>
+                        <p style="color: #155724; margin: 5px 0 0 0; font-size: 0.9em;">
+                            Usa tu botón habitual "Generar Correos" - el sistema usará automáticamente estas tareas configuradas.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // 🎯 VALIDACIÓN EN TIEMPO REAL
+        document.getElementById('tareaAVCO').addEventListener('input', function() {
+            validarFormatoTiempoReal('tareaAVCO', 'AVCO');
+        });
+        
+        document.getElementById('tareaCICO').addEventListener('input', function() {
+            validarFormatoTiempoReal('tareaCICO', 'CICO');
+        });
+        
+        function validarFormatoTiempoReal(textareaId, producto) {
+            const textarea = document.getElementById(textareaId);
+            const valor = textarea.value;
+            
+            // Remover estilos previos
+            textarea.style.borderColor = '#e1e5e9';
+            
+            if (valor.length > 100) {
+                const correos = (valor.match(/C\d+\s*-/g) || []).length;
+                const bases = (valor.match(/(BASE|Base)\s*\d+/g) || []).length;
+                const tonos = (valor.match(/\[tono\s+\w+\]/g) || []).length;
+                
+                // Validación visual
+                if (correos >= 3 && bases >= 1 && tonos >= 2) {
+                    textarea.style.borderColor = '#28a745'; // Verde
+                } else if (correos >= 1 || bases >= 1) {
+                    textarea.style.borderColor = '#ffc107'; // Amarillo
+                } else {
+                    textarea.style.borderColor = '#dc3545'; // Rojo
+                }
+            }
+        }
+        
+        // 🔍 DEBUG MODE (solo en desarrollo)
+        if (window.location.hostname === 'localhost' || window.location.hostname.includes('github.io')) {
+            console.log('🔧 Formulario de Configuración de Tareas v2.0');
+            console.log('🎯 Webhooks configurados:', WEBHOOKS);
+            console.log('📅 Mes actual:', mesYear);
+            
+            // Botón de debug (oculto)
+            document.addEventListener('keydown', function(e) {
+                if (e.ctrlKey && e.shiftKey && e.key === 'D') {
+                    const debug = {
+                        webhooks: WEBHOOKS,
+                        mesActual: mesYear,
+                        timestamp: new Date().toISOString(),
+                        userAgent: navigator.userAgent,
+                        url: window.location.href
+                    };
+                    console.table(debug);
+                    mostrarStatus('🔍 Info de debug enviada a consola', 'info');
+                }
+            });
+        }
+        
+        // 📱 RESPONSIVE IMPROVEMENTS
+        if (window.innerWidth < 768) {
+            document.querySelector('.form-grid').style.gridTemplateColumns = '1fr';
+            document.querySelectorAll('textarea').forEach(ta => {
+                ta.style.minHeight = '250px';
+            });
+        }
+        
+        // 🎉 ANIMACIÓN DE BIENVENIDA
+        setTimeout(() => {
+            document.querySelector('.container').style.transform = 'scale(1)';
+        }, 100);
+        
+    </script>
+</body>
+</html> 🗓️ CONFIGURACIÓN INICIAL
+        const now = new Date();
+        const mesActual = new Date(now.getFullYear(), now.getMonth() + 1, 1);
+        const mesYear = mesActual.toLocaleDateString('es-CO', { 
+            month: 'long', 
+            year: 'numeric' 
+        });
+        document.getElementById('mesActual').textContent = mesYear;
+        
+        // 🎯 CONFIGURACIÓN DE WEBHOOKS - ¡CAMBIAR POR TUS URLs!
+        const WEBHOOKS = {
+            configurar: 'https://TU-N8N-URL.com/webhook/configurar-tareas-mes',  // 👈 CAMBIAR
+            generar: 'https://TU-N8N-URL.com/webhook/generar-correos-pruebas'   // 👈 CAMBIAR
+        };
+        
+        // ⌨️ KEYBOARD SHORTCUTS
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                e.preventDefault();
+                guardarTareas();
+            }
+        });
+        
+        // 📊 CONTADOR DE CARACTERES
+        function updateCharCount(textareaId) {
+            const textarea = document.getElementById(textareaId);
+            const counter = document.getElementById('counter' + textareaId.replace('tarea', ''));
+            const length = textarea.value.length;
+            counter.textContent = `${length.toLocaleString()} caracteres`;
+            
+            // Cambiar color según longitud
+            if (length > 2000) counter.style.color = '#28a745';
+            else if (length > 1000) counter.style.color = '#ffc107';
+            else counter.style.color = '#999';
+        }
+        
+        // 📝 CARGAR EJEMPLO COMPLETO
+        function cargarEjemplo() {
+            document.getElementById('tareaAVCO').value = `VIAJE Base 1
+C1 - reactivación Cotización abandonada [tono personal]
+C2 - Beneficio práctico + rapidez y facilidad + póliza por whatsapp [tono personal/promo]
+C3 - Casos reales de ejemplo [tono personal]
+C4 - Beneficio económico + TREND [tono personal/promo]
+C5 - Último correo antes de viajar + urgencia [tono personal]
+C6 - correo en viaje (decir que es posible contratar viajando) [tono personal]
+___________
+VIAJE Base 2
+C1 - Entrada suave + recordatorio de cotización [tono personal]
+C2 - ventajas del seguro + facilidad [tono personal/promo]
+_________
+VIAJE Base 3
+C1 - Entrada suave + recordatorio de cotización [tono personal]
+C2 - ventajas del seguro + facilidad [tono personal/promo]`;
+
+            document.getElementById('tareaCICO').value = `AUTO Base 1
+C1 - Cotización abandonada [tono personal]
+C2 - facilidad [tono personal/promo]
+C3 - ahorro (poner valores) [tono personal/promo]
+C4 - Trend [tono personal/promo]
+C5 - Última llamada suave [tono personal]
+------------
+AUTO Base 2
+C1 - Follow-up suave con atractivo racional (recuerda interés) [tono personal]
+C2 - Refuerzo de la intención + facilidad [tono personal/promo]
+C3 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
+C4 - Trend [tono personal/promo]
+------------
+AUTO Base 3
+C1 - Follow-up suave con atractivo racional (recuerda interés)
+C2 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
+C3 - Trend [tono personal/promo]`;
+            
+            updateCharCount('tareaAVCO');
+            updateCharCount('tareaCICO');
+            mostrarStatus('📝 Ejemplo cargado exitosamente', 'info');
+        }
+        
+        // 🗑️ LIMPIAR FORMULARIO
+        function limpiarFormulario() {
+            if (confirm('¿Estás seguro de que quieres limpiar todo el formulario?')) {
+                document.getElementById('taskForm').reset();
+                updateCharCount('tareaAVCO');
+                updateCharCount('tareaCICO');
+                document.getElementById('preview').classList.remove('show');
+                mostrarStatus('🗑️ Formulario limpiado', 'info');
+            }
+        }
+        
+        // 📊 MOSTRAR STATUS
+        function mostrarStatus(mensaje, tipo = 'success') {
+            const status = document.getElementById('status');
+            status.innerHTML = tipo === 'info' && mensaje.includes('Configurando') 
+                ? `<span class="loading"></span>${mensaje}` 
+                : mensaje;
+            status.className = `status ${tipo} show`;
+            
+            setTimeout(() => {
+                status.classList.remove('show');
+            }, tipo === 'success' ? 4000 : 3000);
+        }
+        
+        //
