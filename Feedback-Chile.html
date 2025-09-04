@@ -47,9 +47,9 @@
 </head>
 <body>
   <div class="container">
-  <h1>📧 Procesador de Feedbacks</h1>
+  <h1>📧 🇨🇱 Procesador de Feedbacks Chile </h1>
   <p>Después de escribir feedbacks en Notion, haz clic aquí</p>
-  <button onclick="procesar()" id="btn">🚀 Procesar Feedbacks</button>
+  <button onclick="procesar()" id="btn">🚀🇨🇱Procesar Feedbacks</button>
   <div id="status"></div>
 </div>
 
@@ -59,7 +59,7 @@
   document.getElementById('status').innerHTML = '🚀 Iniciando...';
   
   try {
-    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/feedback-conversacional-produccion', {
+    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/feedback-conversacional-produccion-chile', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({timestamp: new Date().toISOString()})
@@ -70,11 +70,12 @@
     document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
   }
   
-  document.getElementById('btn').innerHTML = '🚀 Procesar Feedbacks';
+  document.getElementById('btn').innerHTML = '🚀🇨🇱Procesar Feedbacks';
 
 }
   </script>
 </body>
 </html>
+
 
 
