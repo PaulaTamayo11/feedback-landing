@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📧 Configurar Tareas del Mes - Compara Online</title>
+    <title>📧🇧🇷 Configurar Tarefas do Mês - Compara Online Brasil</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
@@ -155,50 +155,50 @@
 </head>
 <body>
     <div class="container">
-        <h1>📧 Configurar Tareas del Mes</h1>
+        <h1>📧🇧🇷 Configurar Tarefas do Mês</h1>
         
         <div class="mes-actual">
             <h3>🗓️ Configurando para: <span id="mesActual"></span></h3>
-            <p>Configura las tareas una sola vez y genera correos automáticamente todo el mes</p>
+            <p>Configure as tarefas uma vez só e gere e-mails automaticamente durante todo o mês</p>
         </div>
         
         <form id="taskForm">
             <div class="form-group">
-                <label for="tareaAVCO">✈️ Tarea AVCO (Asistencia de Viaje):</label>
+                <label for="tareaAVBR">✈️ Tarefa AVBR (Seguro de Viagem):</label>
                 <textarea 
-                    id="tareaAVCO" 
-                    placeholder="Ejemplo:&#10;&#10;VIAJE Base 1&#10;C1 - reactivación Cotización abandonada [tono personal]&#10;C2 - Beneficio práctico + rapidez y facilidad [tono personal/promo]&#10;..."
+                    id="tareaAVBR" 
+                    placeholder="Exemplo:&#10;&#10;VIAGEM Base 1&#10;C1 - reativação Cotação abandonada [tom pessoal]&#10;C2 - Benefício prático + rapidez e facilidade [tom pessoal/promo]&#10;..."
                 ></textarea>
             </div>
             
             <div class="form-group">
-                <label for="tareaCICO">🚗 Tarea CICO (Seguro para Carro):</label>
+                <label for="tareaCIBR">🚗 Tarefa CIBR (Seguro de Auto):</label>
                 <textarea 
-                    id="tareaCICO" 
-                    placeholder="Ejemplo:&#10;&#10;AUTO Base 1&#10;C1 - Cotización abandonada [tono personal]&#10;C2 - facilidad [tono personal/promo]&#10;..."
+                    id="tareaCIBR" 
+                    placeholder="Exemplo:&#10;&#10;AUTO Base 1&#10;C1 - Cotação abandonada [tom pessoal]&#10;C2 - facilidade [tom pessoal/promo]&#10;..."
                 ></textarea>
             </div>
             
             <div class="btn-container">
                 <button type="button" class="btn btn-secondary" onclick="cargarEjemplo()">
-                    📝 Cargar Ejemplo
+                    📝 Carregar Exemplo
                 </button>
                 <button type="button" class="btn btn-secondary" onclick="limpiarFormulario()">
-                    🗑️ Limpiar Todo
+                    🗑️ Limpar Tudo
                 </button>
                 <button type="button" class="btn btn-primary" onclick="guardarTareas()" id="btnGuardar">
-                    🚀 Configurar Tareas y redactar correos
+                    🚀 Configurar Tarefas e redigir e-mails
                 </button>
             </div>
         </form>
         
         <div class="info-section">
-            <div class="info-title">💡 Información importante</div>
+            <div class="info-title">💡 Informação importante</div>
             <div class="info-content">
-                • <strong>Una línea por correo:</strong> C1, C2, C3... para identificar<br>
-                • <strong>Tono entre corchetes:</strong> [tono personal], [tono personal/promo]<br>
-                • <strong>Separar bases:</strong> Usar líneas divisorias (_____ o -----)<br>
-                • <strong>Se agregan automáticamente:</strong> Instrucciones A/B, formato de bases, guidelines
+                • <strong>Uma linha por e-mail:</strong> C1, C2, C3... para identificar<br>
+                • <strong>Tom entre colchetes:</strong> [tom pessoal], [tom pessoal/promo]<br>
+                • <strong>Separar bases:</strong> Usar linhas divisórias (_____ ou -----)<br>
+                • <strong>São adicionadas automaticamente:</strong> Instruções A/B, formato de bases, diretrizes
             </div>
         </div>
     </div>
@@ -206,64 +206,64 @@
     <div id="status" class="status"></div>
     
     <script>
-        // 📅 MOSTRAR MES ACTUAL
+        // 📅 MOSTRAR MÊS ATUAL
         const now = new Date();
         const mesActual = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-        const mesYear = mesActual.toLocaleDateString('es-CO', { 
+        const mesYear = mesActual.toLocaleDateString('pt-BR', { 
             month: 'long', 
             year: 'numeric' 
         });
         document.getElementById('mesActual').textContent = mesYear;
         
-        // 🎯 CONFIGURACIÓN DE WEBHOOKS
+        // 🎯 CONFIGURAÇÃO DE WEBHOOKS
         const WEBHOOKS = {
-            configurar: 'https://n8n-staging.internal.comparaonline.com/webhook/configurar-tareas-mes'
+            configurar: 'https://n8n-staging.internal.comparaonline.com/webhook/configurar-tareas-mes-brasil'
         };
         
-        // 📝 CARGAR EJEMPLO
+        // 📝 CARREGAR EXEMPLO
         function cargarEjemplo() {
-            document.getElementById('tareaAVCO').value = `VIAJE Base 1
-C1 - reactivación Cotización abandonada [tono personal]
-C2 - Beneficio práctico + rapidez y facilidad + póliza por whatsapp [tono personal/promo]
-C3 - Casos reales de ejemplo [tono personal]
-C4 - Beneficio económico + TREND [tono personal/promo]
-C5 - Último correo antes de viajar + urgencia [tono personal]
-C6 - correo en viaje (decir que es posible contratar viajando) [tono personal]
+            document.getElementById('tareaAVBR').value = `VIAGEM Base 1
+C1 - reativação Cotação abandonada [tom pessoal]
+C2 - Benefício prático + rapidez e facilidade + apólice por whatsapp [tom pessoal/promo]
+C3 - Casos reais de exemplo [tom pessoal]
+C4 - Benefício econômico + TREND [tom pessoal/promo]
+C5 - Último e-mail antes de viajar + urgência [tom pessoal]
+C6 - e-mail durante a viagem (dizer que é possível contratar viajando) [tom pessoal]
 ___________
-VIAJE Base 2
-C1 - Entrada suave + recordatorio de cotización [tono personal]
-C2 - ventajas del seguro + facilidad [tono personal/promo]
+VIAGEM Base 2
+C1 - Entrada suave + lembrete de cotação [tom pessoal]
+C2 - vantagens do seguro + facilidade [tom pessoal/promo]
 _________
-VIAJE Base 3
-C1 - Entrada suave + recordatorio de cotización [tono personal]
-C2 - ventajas del seguro + facilidad [tono personal/promo]`;
+VIAGEM Base 3
+C1 - Entrada suave + lembrete de cotação [tom pessoal]
+C2 - vantagens do seguro + facilidade [tom pessoal/promo]`;
 
-            document.getElementById('tareaCICO').value = `AUTO Base 1
-C1 - Cotización abandonada [tono personal]
-C2 - facilidad [tono personal/promo]
-C3 - ahorro (poner valores) [tono personal/promo]
-C4 - Trend [tono personal/promo]
-C5 - Última llamada suave [tono personal]
+            document.getElementById('tareaCIBR').value = `AUTO Base 1
+C1 - Cotação abandonada [tom pessoal]
+C2 - facilidade [tom pessoal/promo]
+C3 - economia (colocar valores) [tom pessoal/promo]
+C4 - Trend [tom pessoal/promo]
+C5 - Última chamada suave [tom pessoal]
 ------------
 AUTO Base 2
-C1 - Follow-up suave con atractivo racional (recuerda interés) [tono personal]
-C2 - Refuerzo de la intención + facilidad [tono personal/promo]
-C3 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
-C4 - Trend [tono personal/promo]
+C1 - Follow-up suave com atrativo racional (lembra interesse) [tom pessoal]
+C2 - Reforço da intenção + facilidade [tom pessoal/promo]
+C3 - Atrativo emocional + segurança (Despertar o Valor da Proteção) [tom pessoal]
+C4 - Trend [tom pessoal/promo]
 ------------
 AUTO Base 3
-C1 - Follow-up suave con atractivo racional (recuerda interés)
-C2 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
-C3 - Trend [tono personal/promo]`;
+C1 - Follow-up suave com atrativo racional (lembra interesse)
+C2 - Atrativo emocional + segurança (Despertar o Valor da Proteção) [tom pessoal]
+C3 - Trend [tom pessoal/promo]`;
             
-            mostrarStatus('📝 Ejemplo cargado exitosamente', 'info');
+            mostrarStatus('📝 Exemplo carregado com sucesso', 'info');
         }
         
-        // 🗑️ LIMPIAR FORMULARIO
+        // 🗑️ LIMPAR FORMULÁRIO
         function limpiarFormulario() {
-            if (confirm('¿Estás seguro de que quieres limpiar todo el formulario?')) {
+            if (confirm('Tem certeza de que quer limpar todo o formulário?')) {
                 document.getElementById('taskForm').reset();
-                mostrarStatus('🗑️ Formulario limpiado', 'info');
+                mostrarStatus('🗑️ Formulário limpo', 'info');
             }
         }
         
@@ -278,15 +278,15 @@ C3 - Trend [tono personal/promo]`;
             }, 3000);
         }
         
-        // 🚀 GUARDAR TAREAS
+        // 🚀 SALVAR TAREFAS
         async function guardarTareas() {
-            const tareaAVCO = document.getElementById('tareaAVCO').value;
-            const tareaCICO = document.getElementById('tareaCICO').value;
+            const tareaAVBR = document.getElementById('tareaAVBR').value;
+            const tareaCIBR = document.getElementById('tareaCIBR').value;
             const btnGuardar = document.getElementById('btnGuardar');
             
-            // ✅ VALIDACIONES
-            if (!tareaAVCO.trim() || !tareaCICO.trim()) {
-                mostrarStatus('❌ Por favor completa ambas tareas', 'error');
+            // ✅ VALIDAÇÕES
+            if (!tareaAVBR.trim() || !tareaCIBR.trim()) {
+                mostrarStatus('❌ Por favor complete ambas as tarefas', 'error');
                 return;
             }
             
@@ -296,15 +296,15 @@ C3 - Trend [tono personal/promo]`;
             
             const payload = {
                 mesActual: mesYear,
-                tareaDelMesAVCO: tareaAVCO,
-                tareaDelMesCICO: tareaCICO,
-                usuario: 'Email Marketing Team',
+                tareaDelMesAVBR: tareaAVBR,
+                tareaDelMesCIBR: tareaCIBR,
+                usuario: 'Email Marketing Team Brasil',
                 timestamp: new Date().toISOString(),
-                source: 'formulario_github_v2'
+                source: 'formulario_brasil_v1'
             };
             
             try {
-                mostrarStatus('🔧 Enviando configuración...', 'info');
+                mostrarStatus('🔧 Enviando configuração...', 'info');
                 
                 const response = await fetch(WEBHOOKS.configurar, {
                     method: 'POST',
@@ -318,33 +318,33 @@ C3 - Trend [tono personal/promo]`;
                     const result = await response.json();
                     
                     if (result.status === 'success') {
-                        mostrarStatus('✅ Tareas configuradas correctamente! Vuelve en dos minutos a notion para ver los correos redactados', 'success');
-                        btnGuardar.textContent = '🎉 ¡Configurado!';
+                        mostrarStatus('✅ Tarefas configuradas corretamente! Volte em dois minutos no Notion para ver os e-mails redigidos', 'success');
+                        btnGuardar.textContent = '🎉 Configurado!';
                         btnGuardar.style.background = '#28a745';
                         
-                        // Limpiar después de 3 segundos
+                        // Limpar depois de 3 segundos
                         setTimeout(function() {
-                            if (confirm('¿Quieres limpiar el formulario?')) {
+                            if (confirm('Quer limpar o formulário?')) {
                                 limpiarFormulario();
                             }
                             btnGuardar.disabled = false;
-                            btnGuardar.textContent = '🚀 Configurar Tareas y redactar correos';
+                            btnGuardar.textContent = '🚀 Configurar Tarefas e redigir e-mails';
                             btnGuardar.style.background = '';
                         }, 3000);
                         
                     } else {
-                        throw new Error(result.message || 'Error en la configuración');
+                        throw new Error(result.message || 'Erro na configuração');
                     }
                 } else {
-                    throw new Error(`Error ${response.status}: ${response.statusText}`);
+                    throw new Error(`Erro ${response.status}: ${response.statusText}`);
                 }
                 
             } catch (error) {
-                console.error('Error:', error);
-                mostrarStatus(`❌ Error: ${error.message}`, 'error');
+                console.error('Erro:', error);
+                mostrarStatus(`❌ Erro: ${error.message}`, 'error');
                 
                 btnGuardar.disabled = false;
-                btnGuardar.textContent = '🚀 Configurar Tareas y redactar correos';
+                btnGuardar.textContent = '🚀 Configurar Tarefas e redigir e-mails';
             }
         }
     </script>
