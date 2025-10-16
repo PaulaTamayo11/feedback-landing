@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Process feedbacks in Notion and send data to webhook</title>
+  <title>Subir correos de CO a Hubspot </title>
 
   <style>
     .container {
@@ -47,9 +47,9 @@
 </head>
 <body>
   <div class="container">
-  <h1>📧 Procesador de Feedbacks</h1>
-  <p>Después de escribir feedbacks en Notion, haz clic aquí</p>
-  <button onclick="procesar()" id="btn">🚀 Procesar Feedbacks</button>
+  <h1>📧🇨🇴 Subir correos a Hubspot</h1>
+  <p>Después de revisar los correos haz clic aquí</p>
+  <button onclick="procesar()" id="btn">🚀 Subir correos</button>
   <div id="status"></div>
 </div>
 
@@ -59,18 +59,19 @@
   document.getElementById('status').innerHTML = '🚀 Iniciando...';
   
   try {
-    await fetch('https://n8n-staging.internal.comparaonline.com/webhook-test/feedback-conversacional', {
+    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-notion', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({timestamp: new Date().toISOString()})
     });
     
-    document.getElementById('status').innerHTML = '✅ ¡Listo! Revisa Notion en 2 minutos';
+    document.getElementById('status').innerHTML = '✅ ¡Listo! Revisa Hubspot en 5 minutos';
   } catch (error) {
     document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
   }
   
-  document.getElementById('btn').innerHTML = '🚀 Procesar Feedbacks';
+  document.getElementById('btn').innerHTML = '🚀 Subir correos';
+
 }
   </script>
 </body>
