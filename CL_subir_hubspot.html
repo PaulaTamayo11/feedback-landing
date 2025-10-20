@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subir correos de CO a Hubspot </title>
+  <title>Subir correos de CL a Hubspot </title>
 
   <style>
     .container {
@@ -47,7 +47,7 @@
 </head>
 <body>
   <div class="container">
-  <h1>📧🇨🇴 Subir correos a Hubspot</h1>
+  <h1>📧🇨🇱 Subir correos a Hubspot</h1>
   <p>Después de revisar los correos haz clic aquí</p>
   <button onclick="procesar()" id="btn">🚀 Subir correos</button>
   <div id="status"></div>
@@ -59,7 +59,7 @@
   document.getElementById('status').innerHTML = '🚀 Iniciando...';
   
   try {
-    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-CO', {
+    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-CL', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({timestamp: new Date().toISOString()})
@@ -76,4 +76,5 @@
   </script>
 </body>
 </html>
+
 
