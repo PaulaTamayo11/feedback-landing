@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Subir correos de CO a Hubspot </title>
+
+  <style>
+    .container {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  font-family: -apple-system, sans-serif;
+}
+
+#btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px;
+}
+
+#btn:hover {
+  background: #059669;
+  transform: translateY(-2px);
+}
+
+#status {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+  </style>
+
+  
+</head>
+<body>
+  <div class="container">
+  <h1>📧🇨🇴 Subir correos a Hubspot</h1>
+  <p>Después de revisar los correos haz clic aquí</p>
+  <button onclick="procesar()" id="btn">🚀 Subir correos</button>
+  <div id="status"></div>
+</div>
+
+  <script>
+    async function procesar() {
+  document.getElementById('btn').innerHTML = '⏳ Procesando...';
+  document.getElementById('status').innerHTML = '🚀 Iniciando...';
+  
+  try {
+    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-CO', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({timestamp: new Date().toISOString()})
+    });
+    
+    document.getElementById('status').innerHTML = '✅ ¡Listo! Revisa Hubspot en 5 minutos';
+  } catch (error) {
+    document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
+  }
+  
+  document.getElementById('btn').innerHTML = '🚀 Subir correos';
+
+}
+  </script>
+</body>
+</html>
+
