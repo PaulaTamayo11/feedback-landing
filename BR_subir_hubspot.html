@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Subir correos de CO a Hubspot </title>
+  <title>Subir e-mails do BR para o HubSpot </title>
 
   <style>
     .container {
@@ -47,33 +47,34 @@
 </head>
 <body>
   <div class="container">
-  <h1>📧🇨🇴 Subir correos a Hubspot</h1>
-  <p>Después de revisar los correos haz clic aquí</p>
-  <button onclick="procesar()" id="btn">🚀 Subir correos</button>
+  <h1>📧🇧🇷 Subir e-mails para o HubSpot</h1>
+  <p>Depois de revisar os e-mails, clique aqui</p>
+  <button onclick="procesar()" id="btn">📤 Enviar e-mails</button>
   <div id="status"></div>
 </div>
 
   <script>
     async function procesar() {
-  document.getElementById('btn').innerHTML = '⏳ Procesando...';
+  document.getElementById('btn').innerHTML = '⏳ Processando...';
   document.getElementById('status').innerHTML = '🚀 Iniciando...';
   
   try {
-    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-CO', {
+    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/subir-correos-hubspot-BR', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({timestamp: new Date().toISOString()})
     });
     
-    document.getElementById('status').innerHTML = '✅ ¡Listo! Revisa Hubspot en 5 minutos';
+    document.getElementById('status').innerHTML = '✅ Pronto! Verifique o HubSpot em 5 minutos';
   } catch (error) {
     document.getElementById('status').innerHTML = '❌ Error: ' + error.message;
   }
   
-  document.getElementById('btn').innerHTML = '🚀 Subir correos';
+  document.getElementById('btn').innerHTML = '🚀 Enviar e-mails';
 
 }
   </script>
 </body>
 </html>
+
 
