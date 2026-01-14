@@ -59,7 +59,7 @@
   document.getElementById('status').innerHTML = '🚀 Iniciando...';
   
   try {
-    await fetch('https://n8n-staging.internal.comparaonline.com/webhook/feedback-conversacional-produccion-chile', {
+    await fetch('https://n8n.internal.staging.comparaonline.com/webhook/feedback-conversacional-produccion-chile', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({timestamp: new Date().toISOString()})
@@ -76,6 +76,7 @@
   </script>
 </body>
 </html>
+
 
 
 
