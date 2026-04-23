@@ -222,42 +222,132 @@
         
         // 📝 CARGAR EJEMPLO
         function cargarEjemplo() {
-            document.getElementById('tareaAVCL').value = `VIAJE Base 1
-C1 - reactivación Cotización abandonada [tono personal]
-C2 - Beneficio práctico + rapidez y facilidad + póliza por whatsapp [tono personal/promo]
-C3 - Casos reales de ejemplo [tono personal]
-C4 - Beneficio económico + TREND [tono personal/promo]
-C5 - Último correo antes de viajar + urgencia [tono personal]
-C6 - correo en viaje (decir que es posible contratar viajando) [tono personal]
-___________
-VIAJE Base 2
-C1 - Entrada suave + recordatorio de cotización [tono personal]
-C2 - ventajas del seguro + facilidad [tono personal/promo]
-_________
-VIAJE Base 3
-C1 - Entrada suave + recordatorio de cotización [tono personal]
-C2 - ventajas del seguro + facilidad [tono personal/promo]`;
+    document.getElementById('tareaAVCL').value = `VIAJE Base 1 — Cálidos
 
-            document.getElementById('tareaCICL').value = `AUTO Base 1
-C1 - Cotización abandonada [tono personal]
-C2 - facilidad [tono personal/promo]
-C3 - ahorro (poner valores) [tono personal/promo]
-C4 - Trend [tono personal/promo]
-C5 - Última llamada suave [tono personal]
+C1 - Reactivación + urgencia + riesgo concreto
+Ángulo: riesgo real de imprevistos en viaje (enfermedad, pérdida de equipaje) + por qué contratar ANTES de salir y no después
+Tono: personal, cercano, sin alarmismo
+
+C2 - Facilidad + rapidez + entrega inmediata
+Ángulo: contratación simple en minutos + confirmación por WhatsApp
+Promo: 40% de descuento este mes
+Tono: personal, ligero, con comparación cotidiana chilena
+
+C3 - Caso real (uso de asistencia)
+Ángulo: historia de un cliente que usó la asistencia en un momento crítico del viaje y cómo Compara respondió
+Tono: personal, emotivo pero sin exagerar
+Nota: usa un nombre femenino de la lista, distinto al del mes anterior
+
+C4 - Objeción de precio + accesibilidad
+Ángulo: la asistencia cuesta menos de lo que parece — comparación con algo cotidiano chileno (no uses pizza por delivery, busca algo fresco)
+Promo: 40% de descuento este mes
+Tono: personal, con algo de humor
 ------------
-AUTO Base 2
-C1 - Follow-up suave con atractivo racional (recuerda interés) [tono personal]
-C2 - Refuerzo de la intención + facilidad [tono personal/promo]
-C3 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
-C4 - Trend [tono personal/promo]
+VIAJE Base 2 — Tibios
+
+C1 - Follow-up suave con atractivo racional
+Ángulo: hace unas semanas mostró interés en viajar protegido — recordarle que ese instinto tenía sentido y que las condiciones siguen vigentes
+Tono: personal, sin presión
+
+C2 - Refuerzo de la intención + facilidad
+Ángulo: ya estuvo a punto de cotizar, el siguiente paso es más fácil de lo que cree + descuento disponible
+Promo: 40% de descuento este mes
+Tono: personal, ligero
+
+C3 - Atractivo emocional + seguridad
+Ángulo: viajar es de los mejores planes, pero un imprevisto sin cobertura puede arruinarlo todo — protegerse es parte del viaje, no un extra
+Tono: personal, emotivo sin exagerar
+
+C4 - Trend [Base 2 — Tibios]
+Ángulo: vacaciones de invierno en Chile (julio) — el mejor momento para planear y asegurarse ya
+Preview sugerido: las vacaciones de invierno están a la vuelta, ¿ya tienes tu asistencia lista?
+Contexto: estacionalidad real chilena, relevante para quien ya mostró interés en viajar pero no ha cerrado
+Promo: 40% de descuento este mes
+Tono: personal, con sentido de oportunidad
 ------------
-AUTO Base 3
-C1 - Follow-up suave con atractivo racional (recuerda interés)
-C2 - Atractivo emocional + seguridad (Despertar el Valor de la Protección) [tono personal]
-C3 - Trend [tono personal/promo]`;
-            
-            mostrarStatus('📝 Ejemplo cargado exitosamente', 'info');
-        }
+VIAJE Base 3 — Fríos
+
+C1 - Follow-up suave con atractivo racional
+Ángulo: pasó tiempo desde que exploró opciones de viaje — recordarle sin presión que Compara sigue ahí con opciones actualizadas
+Tono: personal, sin reproches
+
+C2 - Atractivo emocional + seguridad
+Ángulo: los imprevistos en el exterior pueden costar mucho más de lo que se imagina — una atención médica fuera de Chile sin cobertura puede salir carísima
+Tono: personal, educativo, sin alarmismo
+
+C3 - Trend [Base 3 — Fríos]
+Ángulo: el dólar bajando hace que viajar al exterior sea más accesible que antes — buen momento para planear ese viaje que tenía pendiente
+Preview sugerido: con el dólar más bajo, ese viaje que tienes en mente está más cerca de lo que crees
+Contexto: tendencia económica real y relevante para motivar a un segmento frío a reactivarse con un ángulo positivo
+Tono: personal, inspiracional`;
+
+    document.getElementById('tareaCICL').value = `AUTO Base 1 — Cálidos
+
+C1 - Cotización abandonada
+Ángulo: recordatorio amigable de que dejó la cotización a medias, invitarlo a retomar sin presión
+Tono: personal, sin regaño, con comparación cotidiana chilena
+
+C2 - Facilidad + rapidez
+Ángulo: lo simple que es contratar online desde el celular, sin papeleos ni filas ni llamadas
+Promo: 20% de descuento este mes
+Tono: personal, ligero
+
+C3 - Ahorro con valor concreto
+Ángulo: cuánto puede ahorrar al año con el 20% de descuento — poner el valor en pesos chilenos y compararlo con algo tangible del día a día
+Promo: 20% de descuento este mes
+Tono: personal, con dato concreto
+
+C4 - Trend [Base 1 — Cálidos]
+Ángulo: aumento de robos de vehículos en Santiago y principales ciudades — dato de actualidad que genera urgencia real
+Preview sugerido: más autos robados este año, ¿el tuyo está protegido?
+Contexto: tema de alta conversación en Chile, genera urgencia sin ser alarmista
+Promo: 20% de descuento este mes
+Tono: personal, informativo
+
+C5 - Última llamada suave
+Ángulo: recordatorio final del descuento, tono de "no queremos que te quedes fuera" sin presión exagerada
+Tono: personal, cálido
+------------
+AUTO Base 2 — Tibios
+
+C1 - Follow-up suave con atractivo racional
+Ángulo: han pasado semanas desde que cotizó, recordarle que su interés tenía sentido y que las condiciones siguen siendo buenas
+Tono: personal, sin presión
+
+C2 - Refuerzo de intención + facilidad
+Ángulo: ya dio el primer paso (cotizar), el siguiente es más fácil + descuento disponible
+Promo: 20% de descuento este mes
+Tono: personal
+
+C3 - Atractivo emocional + seguridad
+Ángulo: el auto no es solo un vehículo, es parte de la rutina y los planes — protegerlo es cuidar la tranquilidad del día a día
+Tono: personal, emotivo sin cursilería
+
+C4 - Trend [Base 2 — Tibios]
+Ángulo: los autos chinos están cambiando el mercado automotor chileno — precios más bajos pero ¿qué pasa con el seguro para estos modelos?
+Preview sugerido: BYD, Chery, JAC: ¿ya cotizaste el seguro para tu auto?
+Contexto: tendencia de mercado real en Chile, relevante para quien ya está considerando un seguro
+Promo: 20% de descuento este mes
+Tono: personal, informativo, con curiosidad
+------------
+AUTO Base 3 — Fríos
+
+C1 - Follow-up suave con atractivo racional
+Ángulo: pasó mucho tiempo pero nunca es tarde — opciones actualizadas disponibles hoy
+Tono: personal, sin reproches
+
+C2 - Atractivo emocional + seguridad
+Ángulo: un imprevisto no avisa — el seguro no es un gasto, es la tranquilidad de saber que estás cubierto
+Tono: personal
+
+C3 - Trend [Base 3 — Fríos]
+Ángulo: inicio del invierno en Chile aumenta los accidentes en ruta — dato educativo que conecta con la necesidad de estar protegido
+Preview sugerido: con el frío y la lluvia vienen los sustos en la ruta, ¿tu auto está cubierto?
+Contexto: estacionalidad real de mayo-julio en Chile, creíble y relevante para el segmento frío
+Tono: personal, educativo`;
+
+    mostrarStatus('📝 Ejemplo cargado exitosamente', 'info');
+}
         
         // 🗑️ LIMPIAR FORMULARIO
         function limpiarFormulario() {
